@@ -1,2 +1,80 @@
-# For_Forder
-폴더만들기_과제
+#include <stdio.h>
+
+void Sorting(int* pArr, int size) 
+{
+	
+	int i = 0;
+	int temp=0;
+	for (int i = 9; i >=0; i--)
+	{
+		for (int n = i; n >=0; n--)
+		{
+			if (pArr[i] > pArr[n])
+			{
+				temp = pArr[n];
+				pArr[n] = pArr[i];
+				pArr[i] = temp;
+			}
+		}
+	}
+	
+}
+int Max(int* pArr, int size)
+{
+																														   
+	int max = pArr[0];
+	for (int i = 0; i < size; i++) {
+		if (pArr[i] > max) max = pArr[i];
+	}
+	return max;
+}
+int Min(int* pArr, int size)
+{
+	int min = pArr[0];
+	for (int i = 0; i < size; i++) {
+		if (pArr[i] < min) min = pArr[i];
+	}
+	return min;
+}
+int main()
+{
+	int b[10] = { 20,34,12,24,54,91,9,40,81,10 };
+	
+    
+	printf("내림차순 정렬 : ");
+	for (int i = 0; i < 10; i++)
+	{
+		Sorting(b, 10);
+		printf("%d ", b[i]);
+	}
+	printf("\n");
+
+	printf("최댓값 : ");
+	printf("%d ", Max(b, 10));
+	printf("\n");
+
+	printf("최솟값 : ");
+	printf("%d ", Min(b, 10));
+	printf("\n");
+
+
+
+}
+/*
+풀면서 문제점 
+
+1. Sorting(b,10)을 main함수의 printf()안에 넣어서 출력하려고 하는데 
+Sorting이 불완전한 함수라고 오류가 뜨는 경우 
+	: void Sorting()은 반환값이 없는 함수이다. 해결법은 다음과 같이 두가지이다. 
+		1. 함수를 int형으로 바꾼다음 반환값을 뱉게 한다. 
+		2. void인 경우에는 반환값이 없으니까 그냥 실행만하게 하는 방법이 있다. 
+			>> Sorting(배열, 어떤매개변수);
+				 printf("배열")
+
+2. 배열출력이 이상하다 >> (자주하는 실수)
+temp = pArr[n];
+pArr[n] = pArr[i];
+pArr[i] = temp;
+바꾸기 부분에서 실수가 있었는지 확인해야함.
+
+*/

@@ -1,1 +1,55 @@
+/*
+구조체 
+- 멤버들은 중괄호 안에 정의 
+- 마지막 중괄호 다음에 반드시 세미콜론을 붙여야 한다. 
+- 구조체의 정의와 선언의 차이
 
+- 구조체의 재정의는 왜 필요할까? : struct라는 키워드를 덜 사용하기 위해서 이다. 
+
+- ->화살표 연산자: 포인터 변수 형태로 정의한 구조체의 멤버변수에 접근 
+- 
+*/
+
+
+//문제: 점 A1과 원점 거리를 구하고 A1과 A2의 거리 , A1을 원점대칭시킨 거리를 구한다. 
+#include <stdio.h>
+#include <math.h>
+struct ThreeDime  {
+	double x;
+	double y;
+	double z;
+};
+
+typedef struct ThreeDime ThreeDime; 
+
+]
+//왜 두 번 정의?
+// struct ThreeDime 을 ThreeDime 이라고 쓸 수 있게함
+double distance1(ThreeDime* a)
+{
+	double d;
+	d = sqrt(a->x * a->x + a->y * a->y + a->z * a->z);
+	//피타고라스 정리 응용 
+	/* 
+	포인터 이름 -> 멤버변수 이름 =값
+	+ (*포인터이름).멤버변수이름 =값
+	*/
+	return d;
+}
+
+double Distance2(ThreeDime a, ThreeDime b)
+{
+	double d;
+	d = sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y) + (a.z - b.z) * (a.z - b.z));
+	//두 점 사이의 거리 계산 
+	return d;
+}
+ThreeDime SymOri(ThreeDime a)
+{
+	// 대칭 시킴
+	a.x = -a.x;
+	a.y = -a.y;
+	a.z = -a.z;
+	return a;
+
+}

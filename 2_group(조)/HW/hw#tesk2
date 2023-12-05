@@ -1,0 +1,163 @@
+#include <stdio.h>
+#include <string.h>
+#define _CRT_SECURE_NO_WARNINGS
+#pragma warning(disable:4996)
+
+struct Books
+{
+	char Title[7];
+	char Authors[8];
+	char Press[8];
+	int Page;
+	int Price;
+	int Borrow;
+};
+
+struct Books b[6];
+
+int main()
+{
+	char choice[11] = "";
+	char title[11] = "";
+	char title_borrow[15] = "";
+	char title_return[15] = "";
+	int cnt = 0;
+
+
+	strcpy(b[0].Title, "Truth");
+	strcpy(b[0].Authors, "John");
+	strcpy(b[0].Press, "Century");
+	b[0].Page = 300;
+	b[0].Price = 20000;
+
+	strcpy(b[1].Title, "Love");
+	strcpy(b[1].Authors, "Paul");
+	strcpy(b[1].Press, "Goods");
+	b[1].Page = 200;
+	b[1].Price = 15000;
+
+	strcpy(b[2].Title, "Joy");
+	strcpy(b[2].Authors, "James");
+	strcpy(b[2].Press, "Cookie");
+	b[2].Page = 250;
+	b[2].Price = 18000;
+
+	strcpy(b[3].Title, "Thanks");
+	strcpy(b[3].Authors, "Mark");
+	strcpy(b[3].Press, "Saejong");
+	b[3].Page = 240;
+	b[3].Price = 21000;
+
+	strcpy(b[4].Title, "God");
+	strcpy(b[4].Authors, "Johnson");
+	strcpy(b[4].Press, "Jungjo");
+	b[4].Page = 450;
+	b[4].Price = 35000;
+
+	for (; ;)
+	{
+		printf(" [도서목록] [검색] [대출] [반납] [종료] ");
+		scanf("%s", choice);
+
+		if (strcmp(choice, "도서목록") == 0)
+		{
+			printf("Title  Authors   Press  Page    Price \n");
+			printf("----- --------  ------ -----   ------\n");
+			for (int i = 0; i < 5; i++)
+			{
+				printf("%-7s %-7s %-7s %-7d %-7d\n", b[i].Title, b[i].Authors, b[i].Press, b[i].Page, b[i].Price);
+			}
+		}
+		if (strcmp(choice, "검색") == 0)
+		{
+			char title[12] = "";
+			printf("검색할 도서를 선택하세요 : ");
+			scanf("%s", title);
+			printf("Title  Authors   Press  Page    Price \n");
+			printf("----- --------  ------ -----   ------\n");
+
+			if (strcmp(title, "Truth") == 0 || strcmp(title, "truth") == 0 || strcmp(title, "TRUTH") == 0)
+			{
+				printf("%-7s %-7s %-7s %-7d %-7d\n", b[0].Title, b[0].Authors, b[0].Press, b[0].Page, b[0].Price);
+			}
+			if (strcmp(title, "Love") == 0 || strcmp(title, "love") == 0 || strcmp(title, "LOVE") == 0)
+			{
+				printf("%-7s %-7s %-7s %-7d %-7d\n", b[1].Title, b[1].Authors, b[1].Press, b[1].Page, b[1].Price);
+			}
+			if (strcmp(title, "Joy") == 0 || strcmp(title, "joy") == 0 || strcmp(title, "JOY") == 0)
+			{
+				printf("%-7s %-7s %-7s %-7d %-7d\n", b[2].Title, b[2].Authors, b[2].Press, b[2].Page, b[2].Price);
+			}
+			if (strcmp(title, "Thanks") == 0 || strcmp(title, "thanks") == 0 || strcmp(title, "THANKS") == 0)
+			{
+				printf("%-7s %-7s %-7s %-7d %-7d\n", b[3].Title, b[3].Authors, b[3].Press, b[3].Page, b[3].Price);
+			}
+			if (strcmp(title, "God") == 0 || strcmp(title, "god") == 0 || strcmp(title, "GOD") == 0)
+			{
+				printf("%-7s %-7s %-7s %-7d %-7d\n", b[4].Title, b[4].Authors, b[4].Press, b[4].Page, b[4].Price);
+			}
+			else
+			{
+				printf("책을 보유하고 있지않습니다.\n");
+			}
+		}
+		if (strcmp(choice, "대출") == 0)
+		{
+
+			printf("대출할 도서를 선택하세요 : ");
+			scanf("%s", title_borrow);
+			cnt = 0;
+
+			for (int i = 0; i < 5; i++) {
+				if (strcmp(title_borrow, b[i].Title) == 0) {
+					if (b[i].Borrow != 1) {
+						cnt += 1;
+						printf(" 대출되었습니다.\n");
+						b[i].Borrow = 1;
+					}
+					else {
+						printf("이미 대출중인 도서입니다.\n");
+					}
+					break;
+				}
+				if (i == 4) {
+					printf("보유하고 있지 않은 책입니다.\n");
+				}
+			}
+
+			}
+			else if (strcmp(choice, "반납") == 0)
+			{
+				printf("반납할 도서를 선택하세요 : ");
+				scanf("%s", title_return);
+
+				for (int i = 0; i < 5; i++)
+				{
+					if (strcmp(title_return, b[i].Title) == 0)
+					{
+						if (b[i].Borrow == 1)
+						{
+							printf("반납되었습니다.\n");
+							b[i].Borrow = 0;
+						}
+						else
+						{
+							printf("이미 반납된 도서입니다.\n");
+						}
+						break;
+					}
+
+					if (i == 4)
+					{
+						printf("보유하고 있지 않은 책입니다.\n");
+					}
+				}
+			}
+			else if (strcmp(choice, "종료") == 0) {
+				printf("프로그램을 종료합니다.\n");
+				break;  // 무한 루프를 빠져나옵니다.
+			}
+
+		}
+	
+}
